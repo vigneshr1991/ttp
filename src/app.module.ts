@@ -6,14 +6,21 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { RolesModule } from './roles/roles.module';
 
+import { DB_config } from "../config";
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(),
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      envFilePath: '.dev.env',
+      expandVariables: true,
+      isGlobal: true,
+    }),
+    RolesModule,
+    UsersModule,
     AuthModule,
-    UsersModule
   ],
   controllers: [AppController],
   providers: [AppService],

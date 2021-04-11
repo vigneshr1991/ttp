@@ -1,12 +1,15 @@
-import { Role } from "../roles/roles.entity";
+import { Role } from "../roles/role.entity";
+import { Provider } from "../utils/enums";
 
 export interface IUser {
     id?: null | number;
     email: string;
     firstName: string;
     lastName: string;
-    roleId?: null | Role;
-    providerId: number;
+    roleId?: null | number;
+    role?: null | Role;
+    providerId: string;
+    provider: Provider;
     dob?: null | Date
     avatar?: null | string;
     isActive: boolean;

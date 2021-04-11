@@ -1,21 +1,19 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+// import { ConfigModule } from '@nestjs/config';
 
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { GoogleStrategy } from "./google.strategy";
 import { JwtStrategy } from "./jwt.strategy";
-import { UsersService } from 'src/users/users.service';
+import { UsersModule } from '../users/users.module';
 
 
 @Module({
   imports: [
-    UsersService,
-    ConfigModule
+    UsersModule
   ],
   controllers: [AuthController],
   providers: [
-    UsersService,
     AuthService,
     GoogleStrategy,
     JwtStrategy

@@ -2,9 +2,9 @@ import { Entity, Column, OneToMany } from 'typeorm';
 
 import { BaseEntity } from "../base/base.entity";
 import { UserRole } from "../utils/enums";
-import { User } from 'src/users/user.entity';
+import { User } from '../users/user.entity';
 
-@Entity(({ name: 'roles' }))
+@Entity('roles')
 export class Role extends BaseEntity {
 
     @Column({

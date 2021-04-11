@@ -1,12 +1,10 @@
 import { EntityRepository, Repository } from 'typeorm';
-import { Injectable } from '@nestjs/common';
 
 import { User } from './user.entity';
 import { IUser } from './users.interface';
 
-// @Injectable()
 @EntityRepository(User)
-export class UserRepository extends Repository<User> {
+export class UsersRepository extends Repository<User> {
   createUser = async (user: IUser) => {
     return await this.save(user);
   };

@@ -1,4 +1,4 @@
-import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate } from 'typeorm';
 
 export abstract class BaseEntity {
 
@@ -18,4 +18,14 @@ export abstract class BaseEntity {
         default: () => 'CURRENT_TIMESTAMP'
     })
     modifiedAt: Date;
+
+    @BeforeUpdate()
+    updateUpdatedAt() {
+        this.modifiedAt = new Date();
+    }
+
+    @BeforeInsert()
+    updateCreatedAt() {
+        this.createdAt = new Date();
+    }
 }

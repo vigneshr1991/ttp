@@ -1,15 +1,12 @@
 import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
 
 import { BaseEntity } from "../base/base.entity";
-import { Role } from 'src/roles/roles.entity';
+import { Role } from '../roles/role.entity';
 import { IUser } from "../users/users.interface";
+import { Provider } from '../utils/enums';
 
-@Entity(({ name: 'users' }))
+@Entity('users')
 export class User extends BaseEntity implements IUser {
-
-    @ManyToOne(() => Role, (role) => role.users)
-    @JoinColumn({ name: "role_id" })
-    roleId: Role;
 
     @Column({
         type: "varchar",
@@ -33,16 +30,27 @@ export class User extends BaseEntity implements IUser {
     email: string;
 
     @Column({
-        type: "double",
+        type: "varchar",
         name: 'provider_id',
-        unique: true
+        unique: true,
+        length: 30,
     })
-    providerId: number;
+    providerId: string;
 
-    @Column() 
+    @Column({
+        type: "enum",
+        enum: Provider
+    })
+    provider: Provider;
+
+    @Column({
+        nullable: true
+    }) 
     dob: Date;
 
-    @Column() 
+    @Column({
+        nullable: true
+    }) 
     avatar: string;
 
     @Column({
@@ -50,4 +58,8 @@ export class User extends BaseEntity implements IUser {
         default: true,
     }) 
     isActive: boolean;
+
+    @ManyToOne(() => Role, (role) => role.users)
+    @JoinColumn({ name: "role_id" })
+    roleId: number;
 }

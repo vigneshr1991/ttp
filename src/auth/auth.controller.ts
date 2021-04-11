@@ -14,12 +14,12 @@ export class AuthController {
     @UseGuards(GoogleAuthGuard)
     googleLoginCallback(@Req() req, @Res() res) {
         // handles the Google OAuth2 callback
-        console.log("googleLoginCallback req :", req.user)
         const jwt: string = req.user.jwt;
-        if (jwt)
-            res.redirect('http://localhost:4200/login/succes/' + jwt);
-        else 
-            res.redirect('http://localhost:4200/login/failure');
+        if (jwt) {
+            res.send({ jwt });
+        } else {
+            throw new Error('Un authorized')
+        }
     }
 
     @Get('protected')
